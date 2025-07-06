@@ -1,15 +1,17 @@
-import { sanityFetch } from "@/sanity/lib/live";
-
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import Image from "next/image";
 
 export default async function Home() {
-
-  const posts = await sanityFetch({ query: POSTS_QUERY });
-  console.log(posts);
-
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="font-open-sans">
+      <div className=" hero">
+        <Image src="/image.JPG" alt="Hero" width={1000} height={1000} className="w-screen h-screen object-cover object-center" />
+      </div>
+      <div className="container mx-auto px-6 py-4">
+        About Me
+      </div>
+      <div className="container mx-auto px-6 py-4">
+        My Work
+      </div>
     </div>
   );
 }
