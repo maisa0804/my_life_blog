@@ -1,46 +1,71 @@
-import {UserIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { UserIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
 
 export const authorType = defineType({
-  name: 'author',
-  title: 'Author',
-  type: 'document',
+  name: "author",
+  title: "Author",
+  type: "document",
   icon: UserIcon,
   fields: [
     defineField({
-      name: 'name',
-      type: 'string',
+      name: "name",
+      title: "Name",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-      },
-    }),
-    defineField({
-      name: 'image',
-      type: 'image',
+      name: "image",
+      title: "Profile Image",
+      type: "image",
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'bio',
-      type: 'array',
+      name: "bio",
+      title: "Bio",
+      type: "array",
       of: [
-        defineArrayMember({
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+        {
+          title: "Block",
+          type: "block",
+          styles: [{ title: "Normal", value: "normal" }],
           lists: [],
-        }),
+        },
+      ],
+    }),
+    defineField({
+      name: "social",
+      title: "Social Links",
+      type: "object",
+      fields: [
+        {
+          name: "twitter",
+          title: "Twitter",
+          type: "url",
+        },
+        {
+          name: "linkedin",
+          title: "LinkedIn",
+          type: "url",
+        },
+        {
+          name: "github",
+          title: "GitHub",
+          type: "url",
+        },
+        {
+          name: "website",
+          title: "Website",
+          type: "url",
+        },
       ],
     }),
   ],
   preview: {
     select: {
-      title: 'name',
-      media: 'image',
+      title: "name",
+      media: "image",
     },
   },
-})
+});
