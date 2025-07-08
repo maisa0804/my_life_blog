@@ -1,0 +1,79 @@
+:root {
+
+  /*////////////////////
+  // Primary Colors
+  ////////////////////*/
+  --color-primary-warm-white: #FEFCF8;
+  --color-primary-white: #FFFFFF;
+  --color-primary-yellow: #F4D03F;
+  --color-primary-blue: #2E5A7A;
+
+  /*////////////////////
+  // Background Colors
+  ////////////////////*/
+  --color-background-primary: #FEFCF8;
+  --color-background-white: #FFFFFF;
+  --color-background-yellow-light: #FDF7E7;
+  --color-background-yellow-lighter: #FEFBF3;
+
+  /*////////////////////
+  // Accent Colors
+  ////////////////////*/
+  --color-accent-yellow: #F4D03F;
+  --color-accent-yellow-hover: #F1C40F;
+  --color-accent-yellow-light: #F8E6A0;
+  --color-accent-yellow-dark: #D4AC0D;
+
+  /*////////////////////
+  // Content Colors
+  ////////////////////*/
+  --color-content-blue: #2E5A7A;
+  --color-content-blue-light: #4A7BA7;
+  --color-content-blue-dark: #1E3A52;
+  --color-content-blue-muted: #5A7FA0;
+
+  /*////////////////////
+  // Warm Gray Scale
+  ////////////////////*/
+  --color-warm-gray-50: #FEFCF8;
+  --color-warm-gray-100: #FBF8F1;
+  --color-warm-gray-200: #F5F0E6;
+  --color-warm-gray-300: #E8DCC8;
+  --color-warm-gray-400: #D4C4A8;
+  --color-warm-gray-500: #B8A082;
+  --color-warm-gray-600: #8B7355;
+  --color-warm-gray-700: #5D4A37;
+  --color-warm-gray-800: #3D2F22;
+  --color-warm-gray-900: #2E1F15;
+
+  /*////////////////////
+  // Text Colors
+  ////////////////////*/
+  --color-text-primary: #2E5A7A;
+  --color-text-secondary: #5A7FA0;
+  --color-text-muted: #8B7355;
+  --color-text-light: #B8A082;
+  --color-text-white: #FEFCF8;
+
+  /*////////////////////
+  // Border Colors
+  ////////////////////*/
+  --color-border-primary: #2E5A7A;
+  --color-border-light: #5A7FA0;
+  --color-border-muted: #E8DCC8;
+  --color-border-accent: #F4D03F;
+
+  /*////////////////////
+  // Semantic Colors
+  ////////////////////*/
+  --color-success: #27AE60;
+  --color-warning: #F39C12;
+  --color-error: #E74C3C;
+  --color-info: #2E5A7A;
+
+  /*////////////////////
+  // Link Colors
+  ////////////////////*/
+  --color-link-default: #2E5A7A;
+  --color-link-hover: #1E3A52;
+}
