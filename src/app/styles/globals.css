@@ -1,12 +1,7 @@
 @plugin "@tailwindcss/typography";
+
 @import "tailwindcss";
-
-body {
-  font-family: 'Montserrat', var(--font-geist-sans), var(--font-geist-mono), sans-serif;
-  background-color: #F9F6EE;
-  color: #23652E;
-}
-
-.font-open-sans {
-  font-family: var(--font-open-sans), 'Open Sans', sans-serif;
-}
+@import "./theme/colors.css";
+@import "./theme/font.css";
+@import "./theme/breakpoints.css";
+@import "./theme/radius.css";

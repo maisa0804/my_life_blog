@@ -1,4 +1,6 @@
-:root {
+@import "tailwindcss";
+
+@theme {
   --border-radius-sm: 0.125rem;
   --border-radius-DEFAULT: 0.25rem;
   --border-radius-md: 0.375rem;
