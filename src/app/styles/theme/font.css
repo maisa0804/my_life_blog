@@ -83,7 +83,7 @@
   --body-line-height: var(--line-height-relaxed);
 
   --caption-font-size: var(--text-fluid-xs);
-  --caption-font-family: var(--font-sans);
+  --caption-font-family: var(--font-cabin);
   --caption-font-weight: var(--font-weight-normal);
   --caption-line-height: var(--line-height-normal);
 }
