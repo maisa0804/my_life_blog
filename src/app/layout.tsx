@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Cabin, Inter } from "next/font/google";
-import Header from "@/app/components/Header";
-import SideBar from "@/app/components/SideBar";
+import Header from "@/app/components/layouts/Header";
 import "./styles/globals.css";
 
 const playfair = Playfair_Display({
@@ -45,8 +44,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cabin.variable} ${inter.variable}`}
     >
-      <body className="antialiase bg-[var(--color-primary-warm-white)]">
-        <SideBar />
+      <body className="antialiase bg-background">
         <Header />
         {children}
       </body>

@@ -5,3 +5,19 @@
 @import "./theme/font.css";
 @import "./theme/breakpoints.css";
 @import "./theme/radius.css";
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  white-space: nowrap;
+  display: flex;
+  animation: marquee 15s linear infinite;
+}
