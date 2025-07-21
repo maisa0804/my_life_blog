@@ -1,5 +1,11 @@
 import Image from "next/image";
-export default function CategoryLink() {
+import { CATEGORY_QUERY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
+
+export default async function CategoryLink() {
+  const categories = await client.fetch(CATEGORY_QUERY);
+  console.log(categories);
+
   return (
     <section className="relative w-full h-auto">
       <a href="#" className="block">
@@ -12,7 +18,7 @@ export default function CategoryLink() {
             className="object-cover"
             sizes="(max-width: 1024px) 160px, 256px"
           />
-          <div className="absolute inset-0 bg-black/20" /> {/* オーバーレイで文字を読みやすく */}
+          <div className="absolute inset-0 bg-black/20" />
         </div>
         <p className="absolute bottom-2 left-2 text-white text-md font-cabin lg:text-2xl lg:bottom-4 lg:left-4 z-10">
           Category Link

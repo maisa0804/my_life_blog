@@ -46,7 +46,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${cabin.variable} ${inter.variable}`}
     >
       <body className="antialiase bg-background">
-        <Header />
+        {/* <Header /> */}
         {children}
         <Footer />
       </body>

@@ -7,7 +7,8 @@ import AboutMe from "./components/pages/top/AboutMe";
 import FeaturedArticles from "./components/pages/top/FeaturedArticles";
 import PcCard from "./components/common/cards/PcCard";
 import HalfPcCard from "./components/common/cards/HalfPcCard";
-export default async function Home() {
+export default function Home() {
+
   return (
     <>
       <Label />
@@ -29,9 +30,6 @@ export default async function Home() {
           </div>
         </div>
         <div className="flex gap-4 overflow-hidden overflow-x-auto">
-          <CategoryLink />
-          <CategoryLink />
-          <CategoryLink />
           <CategoryLink />
         </div >
         <CardWithDescription />

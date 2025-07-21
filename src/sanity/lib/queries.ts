@@ -15,3 +15,11 @@ export const POST_QUERY =
   mainImage,
   body
 }`);
+
+export const CATEGORY_QUERY = defineQuery(`*[_type == "category"] {
+  _id,
+  title,
+  slug,
+  image,
+  seo
+}`);

@@ -40,14 +40,17 @@ export const categoryType = defineType({
       name: "icon",
       title: "Icon",
       type: "string",
-      description: 'Icon name (e.g., "map", "laptop", "heart")',
+      description: 'Icon name for this category',
       options: {
         list: [
-          { title: "🌍 Travel", value: "map" },
-          { title: "💻 Tech", value: "laptop" },
-          { title: "✨ Lifestyle", value: "heart" },
-          { title: "📝 General", value: "document" },
-          { title: "🎯 Featured", value: "star" },
+          { title: "🌍 Travel & Digital Nomad", value: "globe" },
+          { title: "💻 Remote Work", value: "laptop" },
+          { title: "🧘 Wellbeing", value: "heart" },
+          { title: "⚡ Tech & Frontend", value: "code" },
+          { title: "🇸🇪 Sweden Journey", value: "flag" },
+          { title: "📚 Learning & Growth", value: "book" },
+          { title: "🏠 Work-Life Balance", value: "home" },
+          { title: "✨ Featured", value: "star" },
         ],
       },
     }),
@@ -65,7 +68,7 @@ export const categoryType = defineType({
           title: "Alternative Text",
         },
       ],
-      description: "Optional image for category pages",
+      description: "Optional hero image for category pages",
     }),
     defineField({
       name: "featured",
@@ -80,6 +83,23 @@ export const categoryType = defineType({
       type: "number",
       description: "Order in navigation (lower numbers appear first)",
       validation: (Rule) => Rule.integer().positive(),
+    }),
+    defineField({
+      name: "postCount",
+      title: "Target Posts per Month",
+      type: "number",
+      description: "Content planning: How many posts to aim for in this category monthly",
+      validation: (Rule) => Rule.integer().positive().max(30),
+    }),
+    defineField({
+      name: "tags",
+      title: "Related Tags",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Common tags associated with this category",
+      options: {
+        layout: "tags",
+      },
     }),
     defineField({
       name: "seo",
@@ -98,9 +118,17 @@ export const categoryType = defineType({
           type: "text",
           validation: (Rule) => Rule.max(160),
         },
+        {
+          name: "keywords",
+          title: "Focus Keywords",
+          type: "array",
+          of: [{ type: "string" }],
+          description: "SEO keywords for this category",
+        },
       ],
       description: "SEO settings for category pages",
     }),
+
   ],
   orderings: [
     {
@@ -113,6 +141,14 @@ export const categoryType = defineType({
       name: "titleAsc",
       by: [{ field: "title", direction: "asc" }],
     },
+    {
+      title: "Featured First",
+      name: "featuredFirst",
+      by: [
+        { field: "featured", direction: "desc" },
+        { field: "order", direction: "asc" },
+      ],
+    },
   ],
   preview: {
     select: {
@@ -121,21 +157,26 @@ export const categoryType = defineType({
       color: "color",
       icon: "icon",
       order: "order",
+      featured: "featured",
       media: "image",
     },
     prepare(selection) {
-      const { title, description, icon, order } = selection;
+      const { title, description, icon, order, featured } = selection;
       const iconMap = {
-        map: "🌍",
+        globe: "🌍",
         laptop: "💻",
-        heart: "✨",
-        document: "📝",
-        star: "🎯",
+        heart: "🧘",
+        code: "⚡",
+        flag: "🇸🇪",
+        book: "📚",
+        home: "🏠",
+        star: "✨",
       };
       const emoji = iconMap[icon as keyof typeof iconMap] || "📁";
-
+      const featuredBadge = featured ? "⭐ " : "";
+      
       return {
-        title: `${emoji} ${title}`,
+        title: `${featuredBadge}${emoji} ${title}`,
         subtitle: order ? `Order: ${order} • ${description}` : description,
         media: selection.media,
       };
