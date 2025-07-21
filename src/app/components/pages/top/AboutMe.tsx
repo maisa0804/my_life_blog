@@ -12,6 +12,7 @@ export default function AboutMe() {
           src="/image.JPG"
           alt="pc-card"
           fill
+          priority
           style={{ objectFit: "cover" }}
         />
       </div>

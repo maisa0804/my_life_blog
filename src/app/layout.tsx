@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Cabin, Inter } from "next/font/google";
 import Header from "@/app/components/layouts/Header";
 import "./styles/globals.css";
+import Footer from "./components/layouts/Footer";
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className="antialiase bg-background">
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

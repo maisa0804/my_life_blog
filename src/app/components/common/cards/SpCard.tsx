@@ -3,13 +3,14 @@ import CardLabel from "../CardLabel";
 
 export default function SpCard() {
   return (
-    <div className="w-full h-[20rem] md:hidden">
+    <div className="w-full h-auto md:hidden">
       <Image
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover aspect-square"
         src="/image.JPG"
         alt="SpCard"
         width={375}
         height={500}
+        priority
       />
       <h6 className="h6 line-clamp-2">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
