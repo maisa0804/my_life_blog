@@ -27,6 +27,7 @@ export default function Home() {
           <div className="flex flex-col">
             <HalfPcCard />
             <HalfPcCard />
+            <HalfPcCard />
           </div>
         </div>
         <div className="flex gap-4 overflow-hidden overflow-x-auto">
