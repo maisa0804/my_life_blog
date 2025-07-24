@@ -1,0 +1,86 @@
+name: PR Template Automation
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  update-pr-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Determine template based on branch name
+        id: template
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          TEMPLATE_CONTENT=""
+
+          if [[ $BRANCH_NAME == frontend/* ]] || [[ $BRANCH_NAME == ui/* ]] || [[ $BRANCH_NAME == feat/frontend/* ]]; then
+            echo "template_type=frontend" >> $GITHUB_OUTPUT
+            TEMPLATE_CONTENT=$(cat .github/PULL_REQUEST_TEMPLATE/frontend.md)
+          elif [[ $BRANCH_NAME == backend/* ]] || [[ $BRANCH_NAME == api/* ]] || [[ $BRANCH_NAME == feat/backend/* ]]; then
+            echo "template_type=backend" >> $GITHUB_OUTPUT
+            TEMPLATE_CONTENT=$(cat .github/PULL_REQUEST_TEMPLATE/backend.md)
+          else
+            echo "template_type=general" >> $GITHUB_OUTPUT
+            TEMPLATE_CONTENT=$(cat .github/PULL_REQUEST_TEMPLATE/general.md)
+          fi
+
+          # テンプレート内容をファイルに保存（マルチライン対応）
+          echo "$TEMPLATE_CONTENT" > /tmp/template_content.md
+
+      - name: Update PR description
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const templateContent = fs.readFileSync('/tmp/template_content.md', 'utf8');
+
+            // 現在のPR本文を取得
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            // PR本文が空またはデフォルトの場合のみテンプレートを適用
+            if (!pr.body || pr.body.trim() === '' || pr.body.includes('<!-- PR Template -->')) {
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                body: templateContent
+              });
+              
+              // コメントでテンプレート適用を通知
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `🤖 **${{ steps.template.outputs.template_type }}** テンプレートを自動適用しました！\n\nブランチ名: \`${{ github.head_ref }}\``
+              });
+            }
+
+      - name: Add labels based on branch prefix
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = '${{ github.head_ref }}';
+            const labels = [];
+
+            if (branchName.startsWith('frontend/') || branchName.startsWith('ui/')) {
+              labels.push('frontend', 'needs-frontend-review');
+            } else if (branchName.startsWith('backend/') || branchName.startsWith('api/')) {
+              labels.push('backend', 'needs-backend-review');
+            }
+
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: labels
+              });
+            }
